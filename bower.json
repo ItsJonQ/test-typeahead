@@ -15,6 +15,8 @@
   ],
   "dependencies": {
     "jquery": "~2.1.1",
-    "typeahead.js": "~0.10.5"
+    "typeahead.js": "~0.10.5",
+    "list.js": "~1.1.1",
+    "list.fuzzysearch.js": "~0.1.0"
   }
 }
