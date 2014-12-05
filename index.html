@@ -90,31 +90,35 @@ input:focus {
   right:-5px;
 }
 
+input:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
+
   </style>
 
 </head>
 <body>
 
 <div id="users">
-  <input class="search" placeholder="Search" />
-  <button class="sort" data-sort="name">
+  <input class="search" placeholder="Search" id="search"  tabindex="1" />
+<!--   <button class="sort" data-sort="name">
     Sort by name
-  </button>
+  </button> -->
 
-  <ul class="list">
-    <li>
+  <ul class="list" id="list">
+    <li tabindex="1">
       <h3 class="name">Jonny Stromberg</h3>
       <p class="born">1986</p>
     </li>
-    <li>
+    <li tabindex="1">
       <h3 class="name">Jonas Arnklint</h3>
       <p class="born">1985</p>
     </li>
-    <li>
+    <li tabindex="1">
       <h3 class="name">Martina Elm</h3>
       <p class="born">1986</p>
     </li>
-    <li>
+    <li tabindex="1">
       <h3 class="name">Gustaf Lindqvist</h3>
       <p class="born">1983</p>
     </li>
@@ -131,6 +135,31 @@ input:focus {
 };
 
 var userList = new List('users', options);
+
+(function($){
+
+  var $body = $('body');
+  var $search = $('#search');
+  var $list = $('#list');
+
+  $search.focus();
+
+  // $search.on('keydown', function(e){
+  //   console.log(e.keyCode);
+  //   if( e.keyCode === 9 ) {
+  //     e.preventDefault();
+  //     $list.find('li').first().focus();
+  //   }
+  // });
+
+  $body.on('keydown', function(e){
+    if( e.keyCode === 27 ) {
+      $search.focus();
+    }
+  });
+
+
+})(jQuery);
 
 </script>
 
