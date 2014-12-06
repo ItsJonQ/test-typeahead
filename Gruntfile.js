@@ -51,7 +51,7 @@ prototype: {
 },
 sass: {
 files: ['<%= config.src %>/styles/{,*/}*.{scss,sass}'],
-tasks: ['sass:server', 'styleguide', 'ejs'],
+tasks: ['sass:server', 'ejs'],
 options: {
   livereload: 21985
 }
