@@ -94,6 +94,8 @@ input:focus {
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
 }
 
+.new-entry { display:none; }
+
   </style>
 
 </head>
@@ -107,20 +109,32 @@ input:focus {
 
   <ul class="list" id="list">
     <li tabindex="1">
-      <h3 class="name">Jonny Stromberg</h3>
-      <p class="born">1986</p>
+      <h3 class="name">Multiple Logins</h3>
+      <p>Votes: <span class="born">241</span></p>
+      <div class="new-entry">
+        <textarea name="" id="" cols="30" rows="10" placeholder="New entry"></textarea>
+      </div>
     </li>
     <li tabindex="1">
-      <h3 class="name">Jonas Arnklint</h3>
-      <p class="born">1985</p>
+      <h3 class="name">Newsletter Scheduling</h3>
+      <p>Votes: <span class="born">200</span></p>
+      <div class="new-entry">
+        <textarea name="" id="" cols="30" rows="10" placeholder="New entry"></textarea>
+      </div>
     </li>
     <li tabindex="1">
-      <h3 class="name">Martina Elm</h3>
-      <p class="born">1986</p>
+      <h3 class="name">Newsletter A/B Testing</h3>
+      <p>Votes: <span class="born">198</span></p>
+      <div class="new-entry">
+        <textarea name="" id="" cols="30" rows="10" placeholder="New entry"></textarea>
+      </div>
     </li>
     <li tabindex="1">
-      <h3 class="name">Gustaf Lindqvist</h3>
-      <p class="born">1983</p>
+      <h3 class="name">Better Charts</h3>
+      <p>Votes: <span class="born">354</span></p>
+      <div class="new-entry">
+        <textarea name="" id="" cols="30" rows="10" placeholder="New entry"></textarea>
+      </div>
     </li>
   </ul>
 
@@ -141,6 +155,10 @@ var userList = new List('users', options);
   var $body = $('body');
   var $search = $('#search');
   var $list = $('#list');
+  var $listItem = $list.find('li');
+  var $entries = $listItem.find('.new-entry');
+  var $textarea = $('textarea');
+
 
   $search.focus();
 
@@ -155,6 +173,30 @@ var userList = new List('users', options);
   $body.on('keydown', function(e){
     if( e.keyCode === 27 ) {
       $search.focus();
+    }
+  });
+
+  $textarea.on('keydown', function(e){
+    if( e.keyCode === 27 ) {
+      $entries.hide();
+      $search.focus();
+    }
+
+    if( e.keyCode === 9 ) {
+      e.preventDefault();
+      $entries.hide();
+      $(this).closest('li').next().focus();
+    }
+  });
+
+  $listItem.on('keydown', function(e) {
+    if( document.activeElement !== this ) {
+      return;
+    }
+    if( e.keyCode === 13 ) {
+      var $entry = $(this).find('.new-entry');
+      $entry.show();
+      $entry.find('textarea').focus();
     }
   });
 
